@@ -1,6 +1,6 @@
 version: "3"
 services:
   react-app:
-    image: react-app-image
+    image: myapp
     ports:
       - 80:80
