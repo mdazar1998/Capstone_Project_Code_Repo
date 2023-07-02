@@ -36,7 +36,7 @@ pipeline {
             steps {
                 sshagent(['EC2']) {
                 sh '''
-			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'mkdir -p /home/ubunt/deploy'
+			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'mkdir -p /home/ubuntu/deploy'
 			scp -o StrictHostKeyChecking=no deploy.sh ubuntu@ip-172-31-8-107:/home/ubuntu/deploy/deploy.sh
 		'''
                 }       
