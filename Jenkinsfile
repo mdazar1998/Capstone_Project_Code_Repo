@@ -41,7 +41,8 @@ pipeline {
 		'''
                 }       
             }
-	stage('SSH into EC2 Instance') {
+        }
+	    stage('SSH into EC2 Instance') {
             steps {
                 sshagent(['EC2']) {
                 sh '''
@@ -49,6 +50,7 @@ pipeline {
 			sh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && ./deploy.sh'
 		'''			
                 } 
+            }
         }
     }
 }
