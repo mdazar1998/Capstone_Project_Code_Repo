@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your source code from Git
-                git branch: 'master', credentialsId: 'Git-server', url: 'https://github.com/mdazar1998/Capstone_Project_Code_Repo.git'
+                git branch: 'master', credentialsId: 'git', url: 'https://github.com/mdazar1998/Capstone_Project_Code_Repo.git'
             }
         }
         
