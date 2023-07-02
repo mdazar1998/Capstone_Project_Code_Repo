@@ -35,10 +35,7 @@ pipeline {
         stage('SSH into EC2 Instance') {
             steps {
                 sshagent(['EC2']) {
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107"
-                withDockerRegistry([credentialsId: 'dockerhub_credentials', url: '']
-                sh 'docker pull mdazar1998/capstone-project-prod-repo:latest'
-                sh 'docker run -p 80:80 reactapp capstone-project-prod-repo'
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'ls -lart' "
                 }       
             } 
         }
