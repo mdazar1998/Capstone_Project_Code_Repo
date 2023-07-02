@@ -32,7 +32,7 @@ pipeline {
                 }
             }
         }
-        stage('SSH into EC2 Instance') {
+        stage('Copy into EC2 Instance') {
             steps {
                 sshagent(['EC2']) {
                 sh '''
@@ -42,7 +42,7 @@ pipeline {
                 }       
             }
         }
-	    stage('SSH into EC2 Instance') {
+	    stage('Deploy into EC2 Instance') {
             steps {
                 sshagent(['EC2']) {
                 sh '''
