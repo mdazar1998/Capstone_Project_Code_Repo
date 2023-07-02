@@ -1,35 +1,36 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Build and Push') {
-            when {
-                branch 'master'
-            }
+        stage('Checkout') {
             steps {
-                script {
-                    // Build and push Docker image to Docker Hub
-                    docker.build('myapp:latest').push('mydockerhub/myapp:latest')
-                }
+                // Checkout your source code from Git
+                git branch: 'master', credentialsId: 'Git-server', url: 'https://github.com/mdazar1998/Capstone_Project_Code_Repo.git'
             }
         }
-        stage('Build and Push Dev') {
-            when {
-                branch 'dev'
-            }
+        
+        stage('Build application') {
             steps {
-                script {
-                    // Build and push Docker image to Docker Hub
-                    docker.build('myapp:dev').push('mydockerhub/myapp:dev')
-                }
+                // Build the Docker image using build.sh script
+                sh './build.sh $BUILD_NUMBER'
             }
         }
-    }
+        
+        stage('Push to Docker Hub') {
+            steps {
+                
+                // Login to Docker Hub
+                withDockerRegistry([credentialsId: 'dockerhub_credentials', url: '']) {
+                    // Tag the Docker image
+                    sh 'docker tag myapp:$BUILD_NUMBER mdazar1998/capstone-project-prod-repo:latest'
+                    
+                    // Push the Docker image to Docker Hub repository
+                    // capstone-project-repo/
+                    sh 'docker push mdazar1998/capstone-project-prod-repo:latest'
+                    // sh 'docker push myapp:latest'
 
-    post {
-        always {
-            // Cleanup Docker resources
-            cleanWs()
+                }
+            }
         }
     }
 }
