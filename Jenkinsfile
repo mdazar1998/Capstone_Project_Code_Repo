@@ -2,8 +2,6 @@
 pipeline {
     agent any
     stages {
-        withCredentials([string(credentialsId: 'git')])
-        {
         stage('Checkout') {
             steps {
                 // Checkout your source code from Git
@@ -35,5 +33,4 @@ pipeline {
             }
         }
     }
-}
 }
