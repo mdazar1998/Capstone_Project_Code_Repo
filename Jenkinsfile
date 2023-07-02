@@ -1,5 +1,5 @@
 // Code to build
-withCredentials([string(credentialsId: 'git', variable: 'Username and Password')]) {
+withCredentials([string(credentialsId: 'git', variable: 'Username and Password')])
 pipeline {
     agent any
     stages {
@@ -34,5 +34,4 @@ pipeline {
             }
         }
     }
-}
 }
