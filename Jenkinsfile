@@ -47,7 +47,7 @@ pipeline {
                 sshagent(['EC2']) {
                 sh '''
 			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && chmod +x deploy.sh'
-			sh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && ./deploy.sh'
+			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && ./deploy.sh'
 		'''			
                 } 
             }
