@@ -35,9 +35,20 @@ pipeline {
         stage('SSH into EC2 Instance') {
             steps {
                 sshagent(['EC2']) {
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'ls -lart' "
+                sh '''
+			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'mkdir -p /home/ubunt/deploy'
+			scp -o StrictHostKeyChecking=no deploy.sh ubuntu@ip-172-31-8-107:/home/ubuntu/deploy/deploy.sh
+		'''
                 }       
-            } 
+            }
+	stage('SSH into EC2 Instance') {
+            steps {
+                sshagent(['EC2']) {
+                sh '''
+			ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && chmod +x deploy.sh'
+			sh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107 'cd /home/ubuntu/deploy && ./deploy.sh'
+		'''			
+                } 
         }
     }
 }
