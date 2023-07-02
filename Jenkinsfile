@@ -8,7 +8,7 @@ pipeline {
                 git branch: 'master', credentialsId: 'git', url: 'https://github.com/mdazar1998/Capstone_Project_Code_Repo.git'
             }
         }
-        
+
         stage('Build application') {
             steps {
                 // Build the Docker image using build.sh script
@@ -31,6 +31,16 @@ pipeline {
 
                 }
             }
+        }
+        stage('SSH into EC2 Instance') {
+            steps {
+                sshagent(['EC2']) {
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@ip-172-31-8-107"
+                withDockerRegistry([credentialsId: 'dockerhub_credentials', url: '']
+                sh 'docker pull mdazar1998/capstone-project-prod-repo:latest'
+                sh 'docker run -p 80:80 reactapp capstone-project-prod-repo'
+                }       
+            } 
         }
     }
 }
