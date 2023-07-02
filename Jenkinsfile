@@ -2,7 +2,6 @@
 withCredentials([string(credentialsId: 'git', variable: 'Username and Password')]) {
 pipeline {
     agent any
-    
     stages {
         stage('Checkout') {
             steps {
