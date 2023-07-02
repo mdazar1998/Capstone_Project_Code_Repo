@@ -1,8 +1,8 @@
 // Code to build
-withCredentials([string(credentialsId: 'git')])
 pipeline {
     agent any
     stages {
+        withCredentials([string(credentialsId: 'git')])
         stage('Checkout') {
             steps {
                 // Checkout your source code from Git
