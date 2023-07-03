@@ -13,13 +13,13 @@ fi
 # Authenticate with Docker Hub
 # Set the Docker Hub credentials
 DOCKER_USERNAME="mdazar1998"
-DOCKER_PASSWORD="Azarudeen@1998"
+DOCKER_PASSWORD="dckr_pat_Ep7uStBzLwfy-vPjn81QruO3vvI"
 
-"$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 
 # Pull the image
 sudo docker pull ${IMAGE_NAME}
 
 # Run the container
-sudo docker run -d --name ${CONTAINER_NAME} ${IMAGE_NAME}
+sudo docker run -d --name ${CONTAINER_NAME} -p 80:80  ${IMAGE_NAME}
 sudo docker logout
