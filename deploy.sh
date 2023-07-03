@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-IMAGE_NAME="mdazar1998/capstone-project-prod-repo:latest"
+IMAGE_NAME="mdazar1998/capstone-project-dev-repo:latest"
 CONTAINER_NAME="React-Container"
 
 # Check if the container is already running
