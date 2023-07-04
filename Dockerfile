@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+RUN npm install prom-client
 
 # Copy the source code
 COPY . .
