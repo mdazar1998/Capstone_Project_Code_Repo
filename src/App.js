@@ -4,15 +4,6 @@ import "./App.css";
 import { Table } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import promClient from 'prom-client';
-
-const httpRequestDurationMs = new promClient.Histogram({
-  name: 'http_request_duration_ms',
-  help: 'Duration of HTTP requests in milliseconds',
-  labelNames: ['route'],
-  buckets: [0.1, 5, 15, 50, 100, 500], // Adjust the buckets as per your needs
-});
-
 
 class App extends Component {
   constructor(props) {
@@ -22,32 +13,18 @@ class App extends Component {
       users: [],
     };
   }
+
   componentDidMount() {
     const url = "http://localhost:5000/users";
-    const start = Date.now();
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        const end = Date.now();
-        const durationMs = end - start;
-        httpRequestDurationMs.labels('/users').observe(durationMs);
         this.setState({
           users: result,
         });
       })
       .catch((err) => console.log(err));
   }
-  /*componentDidMount() {
-    const url = "http://localhost:5000/users";
-    fetch(url)
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({
-          users: result,
-        });
-      })
-      .catch((err) => console.log(err));
-  }*/
 
   render() {
     const { error, users } = this.state;
