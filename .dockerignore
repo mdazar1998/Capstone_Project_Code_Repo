@@ -1,0 +1,15 @@
+# Ignore files with .sh extension
+*.sh
+
+# Ignore files with .txt extension
+*.txt
+
+# Ignore Jenkinsfile
+Jenkinsfile
+
+
+# Ignore the 'node_modules' directory
+node_modules/
+
+# Ignore all files and directories starting with 'temp'
+temp*/
