@@ -26,6 +26,18 @@ pipeline {
                 }
             }
         }
+        stage('Pull and Push Docker hub') {
+            steps {
+                // Login to Docker Hub
+                withDockerRegistry([credentialsId: 'dockerhub_credentials', url: '']) {
+                    // Tag the Docker image
+                    sh 'docker pull mdazar1998/capstone-project-dev-repo:latest'
+                    sh 'docker tag mdazar1998/capstone-project-dev-repo:latest mdazar1998/capstone-prod-repo:latest'
+                    // Push the Docker image to Docker Hub repository
+                    sh 'docker push mdazar1998/capstone-project-prod-repo:latest'
+                }
+            }
+        }
         stage('Copy the file to prod instance') {
             steps {
                 sshagent(['EC2']) {
